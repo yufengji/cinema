@@ -84,12 +84,17 @@
 </template>
 
 <script>
+import {billboard} from '@/api/home.js'
 export default {
-  name: 'HelloWorld',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  created () {
+    billboard().then((res) => {
+      console.log(res)
+    })
   }
 }
 </script>
