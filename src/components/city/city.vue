@@ -137,6 +137,7 @@ export default {
       const nav = this.$refs.navGroup
       let height = hot[0].clientHeight + nav[0].clientHeight
       this.listHeight.push(height)
+      console.log(list[0].clientHeight)
       for (let i = 0; i < list.length; i++) {
         let item = list[i]
         height += item.clientHeight
@@ -168,7 +169,7 @@ export default {
           width: 25%
           text-align: center
           font-size: 32px
-          line-height: 92px
+          line-height: 90px
           cursor: pointer
           color: #838383
           border-bottom: #ebebeb 1px solid
