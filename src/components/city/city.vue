@@ -1,7 +1,28 @@
 <template>
   <div class="city">
     <m-header></m-header>
-    <div class="list" v-for="(item, index) in city" :key="index">
+    <div class="handle-height"></div>
+    <div class="list" v-for="(item, index) in city.slice(0, 1)" :key="index" ref="hotGroup">
+      <div class="title">
+        {{item.title}}
+      </div>
+      <div class="city-container">
+        <ul>
+          <li v-for="item2 in item.items" :key="item2.id">{{item2.name}}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="list" v-for="(item, index) in city.slice(1, 2)" :key="'nav'+index" ref="navGroup">
+      <div class="title">
+        {{item.title}}
+      </div>
+      <div class="city-container">
+        <ul>
+          <li v-for="(item2, index2) in item.items" :key="item2.id" @click="goToCity(index2)">{{item2.name}}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="list" v-for="(item, index) in city.slice(2,city.length)" :key="'city'+index" ref="listGroup">
       <div class="title">
         {{item.title}}
       </div>
@@ -16,6 +37,7 @@
 <script>
 import MHeader from '@/components/header/header'
 import {city} from '@/api/city.js'
+import {down} from '@/common/js/scrollTo.js'
 export default {
   components: {
     MHeader
@@ -26,7 +48,15 @@ export default {
     }
   },
   created () {
+    this.listHeight = []
     this._getCity()
+  },
+  watch: {
+    city () {
+      setTimeout(() => {
+        this._calculaterHeight()
+      }, 20)
+    }
   },
   methods: {
     _getCity () {
@@ -71,20 +101,16 @@ export default {
           {id: 1005, name: 'F'},
           {id: 1006, name: 'G'},
           {id: 1007, name: 'H'},
-          {id: 1008, name: 'I'},
           {id: 1009, name: 'J'},
           {id: 1010, name: 'K'},
           {id: 1011, name: 'L'},
           {id: 1012, name: 'M'},
           {id: 1013, name: 'N'},
-          {id: 1014, name: 'O'},
           {id: 1015, name: 'P'},
           {id: 1016, name: 'Q'},
           {id: 1017, name: 'R'},
           {id: 1018, name: 'S'},
           {id: 1019, name: 'T'},
-          {id: 1020, name: 'U'},
-          {id: 1021, name: 'V'},
           {id: 1022, name: 'W'},
           {id: 1023, name: 'X'},
           {id: 1024, name: 'Y'},
@@ -102,8 +128,23 @@ export default {
       ret.sort((a, b) => {
         return a.title.charCodeAt(0) - b.title.charCodeAt(0)
       })
-      console.log(hot.concat(ret))
       return hot.concat(navMap, ret)
+    },
+    _calculaterHeight () {
+      this.listHeight = []
+      const list = this.$refs.listGroup
+      const hot = this.$refs.hotGroup
+      const nav = this.$refs.navGroup
+      let height = hot[0].clientHeight + nav[0].clientHeight
+      this.listHeight.push(height)
+      for (let i = 0; i < list.length; i++) {
+        let item = list[i]
+        height += item.clientHeight
+        this.listHeight.push(height)
+      }
+    },
+    goToCity (index) {
+      down(this.listHeight[index])
     }
   }
 }
