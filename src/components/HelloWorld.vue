@@ -84,7 +84,7 @@
 </template>
 
 <script>
-import {billboard} from '@/api/home.js'
+import {billboard, nowPlayig} from '@/api/home.js'
 export default {
   data () {
     return {
@@ -93,6 +93,9 @@ export default {
   },
   created () {
     billboard().then((res) => {
+      console.log(res)
+    })
+    nowPlayig().then((res) => {
       console.log(res)
     })
   }
