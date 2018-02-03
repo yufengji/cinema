@@ -21,7 +21,6 @@
 </template>
 <script>
 export default {
-
 }
 </script>
 <style scoped lang="stylus">
@@ -67,6 +66,4 @@ export default {
         float: left
         width: 100px
         text-align: center
-
-
 </style>
