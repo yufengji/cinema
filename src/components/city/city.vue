@@ -28,7 +28,7 @@
       </div>
       <div class="city-container">
         <ul>
-          <li v-for="item2 in item.items" :key="item2.id">{{item2.name}}</li>
+          <li v-for="item2 in item.items" :key="item2.id" @click="setCity(item2)">{{item2.name}}</li>
         </ul>
       </div>
     </div>
@@ -38,6 +38,7 @@
 import MHeader from '@/components/header/header'
 import {city} from '@/api/city.js'
 import {down} from '@/common/js/scrollTo.js'
+import {setCookie} from '@/common/js/cookie.js'
 export default {
   components: {
     MHeader
@@ -146,6 +147,11 @@ export default {
     },
     goToCity (index) {
       down(this.listHeight[index])
+    },
+    setCity (item) {
+      setCookie('cityId', item.id, 1)
+      setCookie('cityName', item.name, 1)
+      this.$router.push({path:'/'})
     }
   }
 }

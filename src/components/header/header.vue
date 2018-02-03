@@ -5,11 +5,11 @@
         <i class="iconfont icon-zhankai1"></i>
       </div>
       <div class="toolbar-title">
-        卖座电影
+        {{title}}
       </div>
     </div>
     <div class="nav-right">
-      <a href="javascript:;" class="city">
+      <a href="javascript:;" class="city" @click="goLink">
         <span class="city-content">厦门</span>
         <i class="iconfont icon-zhankai"></i>
       </a>
@@ -20,7 +20,22 @@
   </div>
 </template>
 <script>
+import {mapGetters, mapMutations} from 'vuex'
 export default {
+  computed: {
+    ...mapGetters([
+      'title'
+    ])
+  },
+  methods: {
+    goLink () {
+      this.SET_TITLE('选择城市')
+      this.$router.push({path: '/city'})
+    },
+    ...mapMutations({
+      SET_TITLE: 'SET_TITLE'
+    })
+  }
 }
 </script>
 <style scoped lang="stylus">

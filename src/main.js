@@ -6,6 +6,7 @@ import router from './router'
 import '@/common/stylus/index.styl'
 import fastclick from 'fastclick'
 import 'lib-flexible'
+import store from '@/store/store.js'
 
 Vue.config.productionTip = false
 fastclick.attach(document.body)
@@ -14,6 +15,7 @@ fastclick.attach(document.body)
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

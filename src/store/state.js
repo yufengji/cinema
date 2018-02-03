@@ -1,4 +1,4 @@
 const state = {
-  title: ''
+  title: '卖座电影'
 }
 export default state
