@@ -21,6 +21,7 @@
   </div>
 </template>
 <script>
+
 export default{
   props: {
     filmData: {
@@ -37,6 +38,8 @@ export default{
       type: Boolean,
       default: false
     }
+  },
+  components: {
   }
 }
 </script>

@@ -27,7 +27,10 @@ export default {
   },
   data () {
     return {
-      nowplaying: []
+      nowplaying: [],
+      page: 1,
+      count: 5,
+      totalpage: 1
     }
   },
   created () {
@@ -40,13 +43,22 @@ export default {
   methods: {
     getMore () {
       if (isBottom()) {
-        console.log('bottom')
+        this.page++
+        if (this.page > this.totalpage) {
+          return
+        }
+        nowPlaying(this.page, this.count).then((res) => {
+          if (res.status === 0) {
+            this.nowplaying = this.nowplaying.concat(res.data.films)
+          }
+        })
       }
     },
     _getNowPlaying () {
       nowPlaying(this.page, this.count).then((res) => {
         if (res.status === 0) {
           this.nowplaying = res.data.films
+          this.totalpage = res.data.page.total
         }
       })
     }
