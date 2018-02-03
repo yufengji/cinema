@@ -49,6 +49,7 @@ export default {
     left: 0
     right: 0
     overflow: hidden
+    z-index: 99
     .h-title
       float: left
       width: auto

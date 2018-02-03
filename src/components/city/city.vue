@@ -151,7 +151,12 @@ export default {
     setCity (item) {
       setCookie('cityId', item.id, 1)
       setCookie('cityName', item.name, 1)
-      this.$router.push({path:'/'})
+      setCookie('gr_user_id', 'efa2b4ac-6328-4e30-a864-b29b0ba39b49', 1)
+      setCookie('gr_session_id_929dfc63e100d573', '39610c21-ee8b-43eb-a5ca-7326dcc9458a', 1)
+      setCookie('co', 'maizuo', 1)
+      setCookie('UM_distinctid', '161461a758f126-05370819dc14b3-574e6e46-25800-161461a7590768', 1)
+      setCookie('CNZZDATA1254948863', '1737149624-1517296854-https%253A%252F%252Fwww.baidu.com%252F%7C1517640618', 1)
+      this.$router.push({path: '/'})
     }
   }
 }
