@@ -4,6 +4,7 @@ import Home from '@/components/home/home'
 import City from '@/components/city/city'
 import NowPlaying from '@/components/now-playing/now-playing'
 import ComingSoon from '@/components/coming-soon/coming-soon'
+import Film from '@/components/film/film'
 
 Vue.use(Router)
 
@@ -22,12 +23,19 @@ export default new Router({
       component: City
     },
     {
-      path: '/now-playing',
-      component: NowPlaying
-    },
-    {
-      path: '/coming-soon',
-      component: ComingSoon
+      path: '/film',
+      component: Film,
+      redirect: '/film/now-playing',
+      children: [
+        {
+          path: 'now-playing',
+          component: NowPlaying
+        },
+        {
+          path: 'coming-soon',
+          component: ComingSoon
+        }
+      ]
     }
   ]
 })
