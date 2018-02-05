@@ -21,7 +21,7 @@
   </div>
 </template>
 <script>
-
+import {isBottom} from '@/common/js/scrollBottom.js'
 export default{
   props: {
     filmData: {
@@ -40,6 +40,17 @@ export default{
     }
   },
   components: {
+  },
+  mounted () {
+    document.documentElement.scrollTop = 0
+    window.addEventListener('scroll', this.getMore)
+  },
+  methods: {
+    getMore () {
+      if (isBottom()) {
+        this.$emit('getMore')
+      }
+    }
   }
 }
 </script>

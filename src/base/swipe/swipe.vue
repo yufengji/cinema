@@ -25,5 +25,6 @@ export default {
 </script>
 <style scoped lang="stylus">
   .swiper
+    width: 100%
     height: 425px
 </style>

@@ -11,48 +11,50 @@
           <span>即将上映</span>
         </a>
       </div>
-      <film-list :filmData="nowplaying"></film-list>
+      <film-list :filmData="nowplaying" @getMore="getMore"></film-list>
+      <loading :hasmore="hasmore"></loading>
     </div>
   </div>
 </template>
 <script>
 import MHeader from '@/components/header/header'
 import FilmList from '@/components/film-list/film-list'
+import loading from '@/base/loading/loading'
 import {nowPlaying} from '@/api/nowPlaying.js'
-import {isBottom} from '@/common/js/scrollBottom.js'
 export default {
   components: {
     MHeader,
-    FilmList
+    FilmList,
+    loading
   },
   data () {
     return {
       nowplaying: [],
       page: 1,
       count: 5,
-      totalpage: 1
+      totalpage: 1,
+      hasmore: {
+        flag: true,
+        tip: '正在加载'
+      }
     }
   },
   created () {
     this._getNowPlaying()
   },
-  mounted () {
-    document.documentElement.scrollTop = 0
-    window.addEventListener('scroll', this.getMore)
-  },
   methods: {
     getMore () {
-      if (isBottom()) {
-        this.page++
-        if (this.page > this.totalpage) {
-          return
-        }
-        nowPlaying(this.page, this.count).then((res) => {
-          if (res.status === 0) {
-            this.nowplaying = this.nowplaying.concat(res.data.films)
-          }
-        })
+      this.page++
+      if (this.page > this.totalpage) {
+        this.hasmore.flag = false
+        this.hasmore.tip = '没有更多了'
+        return
       }
+      nowPlaying(this.page, this.count).then((res) => {
+        if (res.status === 0) {
+          this.nowplaying = this.nowplaying.concat(res.data.films)
+        }
+      })
     },
     _getNowPlaying () {
       nowPlaying(this.page, this.count).then((res) => {
