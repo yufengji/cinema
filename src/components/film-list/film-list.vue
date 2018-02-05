@@ -13,7 +13,7 @@
             </div>
             <p class="film-intro">{{item.intro}}</p>
             <p class="film-counts" v-if="playingFlag"><span>{{item.cinemaCount}}家影院上映</span><span>{{item.watchCount}}人购票</span></p>
-            <p class="film-premiere-date" v-if="playTimeFlag"><span>2月16日上映</span><span>星期五</span></p>
+            <p class="film-premiere-date" v-if="playTimeFlag"><span>{{formatDate(item.premiereAt)}}</span></p>
           </div>
         </div>
       </li>
@@ -50,6 +50,14 @@ export default{
       if (isBottom()) {
         this.$emit('getMore')
       }
+    },
+    formatDate (d) {
+      let _w = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+      let date = new Date(d)
+      let month = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1)
+      let day = date.getDate()
+      let week = _w[date.getDay()]
+      return `${month}月${day}日上映 ${week}`
     }
   }
 }

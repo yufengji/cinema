@@ -1,35 +1,38 @@
 <template>
-  <div class="now-playing">
+  <div class="coming-soon">
     <m-header></m-header>
     <div class="handle-height"></div>
     <div class="film-list-wrap">
       <div class="film-list-nav">
-        <a href="javascript:;">
-          <span class="choosing">正在热映</span>
-        </a>
-        <router-link to="/coming-soon">
-          <span>即将上映</span>
+        <router-link to="/now-playing">
+          <span>正在热映</span>
         </router-link>
+        <a href="javascript:;">
+          <span class="choosing">即将上映</span>
+        </a>
       </div>
-      <film-list :filmData="nowplaying" @getMore="getMore"></film-list>
+      <film-list :filmData="comingsoon" :playingFlag="false" :playTimeFlag="true" @getMore="getMore"></film-list>
       <loading :hasmore="hasmore"></loading>
     </div>
   </div>
 </template>
 <script>
 import MHeader from '@/components/header/header'
-import FilmList from '@/components/film-list/film-list'
 import loading from '@/base/loading/loading'
-import {nowPlaying} from '@/api/nowPlaying.js'
+import FilmList from '@/components/film-list/film-list'
+import {comingSoon} from '@/api/nowPlaying.js'
 export default {
   components: {
     MHeader,
     FilmList,
     loading
   },
+  created () {
+    this._getComingSoon()
+  },
   data () {
     return {
-      nowplaying: [],
+      comingsoon: [],
       page: 1,
       count: 5,
       totalpage: 1,
@@ -39,10 +42,15 @@ export default {
       }
     }
   },
-  created () {
-    this._getNowPlaying()
-  },
   methods: {
+    _getComingSoon () {
+      comingSoon(this.page, this.count).then((res) => {
+        if (res.status === 0) {
+          this.totalpage = res.data.page.total
+          this.comingsoon = res.data.films
+        }
+      })
+    },
     getMore () {
       this.page++
       if (this.page > this.totalpage) {
@@ -50,17 +58,9 @@ export default {
         this.hasmore.tip = '没有更多了'
         return
       }
-      nowPlaying(this.page, this.count).then((res) => {
+      comingSoon(this.page, this.count).then((res) => {
         if (res.status === 0) {
-          this.nowplaying = this.nowplaying.concat(res.data.films)
-        }
-      })
-    },
-    _getNowPlaying () {
-      nowPlaying(this.page, this.count).then((res) => {
-        if (res.status === 0) {
-          this.nowplaying = res.data.films
-          this.totalpage = res.data.page.total
+          this.comingsoon = this.comingsoon.concat(res.data.films)
         }
       })
     }
