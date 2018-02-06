@@ -1,5 +1,5 @@
 <template>
-  <div class="cinema">
+  <div class="film">
     <m-header></m-header>
     <div class="handle-height"></div>
     <div class="film-list-wrap">

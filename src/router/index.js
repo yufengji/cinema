@@ -5,7 +5,8 @@ import City from '@/components/city/city'
 import NowPlaying from '@/components/now-playing/now-playing'
 import ComingSoon from '@/components/coming-soon/coming-soon'
 import Film from '@/components/film/film'
-
+import Detail from '@/components/detail/detail'
+import Cinema from '@/components/cinema/cinema'
 Vue.use(Router)
 
 export default new Router({
@@ -34,6 +35,15 @@ export default new Router({
         {
           path: 'coming-soon',
           component: ComingSoon
+        },
+        {
+          path: ':id',
+          component: Detail
+        },
+        {
+          path: ':id/cinema',
+          name: 'cinemawithid',
+          component: Cinema
         }
       ]
     }

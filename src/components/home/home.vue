@@ -24,7 +24,7 @@
           </li>
         </ul>
         <div class="btn-more">
-          <router-link to="/now-playing">更多热映电影</router-link>
+          <router-link to="/film/now-playing">更多热映电影</router-link>
         </div>
       </div>
     </div>
@@ -52,7 +52,7 @@
           </li>
         </ul>
         <div class="btn-more">
-          更多即将上映电影
+          <router-link to="/film/coming-soon">更多即将上映电影</router-link>
         </div>
       </div>
     </div>

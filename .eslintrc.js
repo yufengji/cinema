@@ -28,6 +28,7 @@ module.exports = {
     "no-inline-comments": 0,
     'eol-last': 0,
     'space-before-function-paren': 0,
-    "no-tabs": "off"
+    "no-tabs": "off",
+    "no-irregular-whitespace": 0
   }
 }

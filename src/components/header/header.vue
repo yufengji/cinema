@@ -10,7 +10,7 @@
     </div>
     <div class="nav-right">
       <a href="javascript:;" class="city" @click="goLink">
-        <span class="city-content">厦门</span>
+        <span class="city-content">{{city}}</span>
         <i class="iconfont icon-zhankai"></i>
       </a>
       <a href="javascript:;" class="user">
@@ -24,7 +24,8 @@ import {mapGetters, mapMutations} from 'vuex'
 export default {
   computed: {
     ...mapGetters([
-      'title'
+      'title',
+      'city'
     ])
   },
   methods: {

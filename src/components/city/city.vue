@@ -158,10 +158,12 @@ export default {
       setCookie('UM_distinctid', '161461a758f126-05370819dc14b3-574e6e46-25800-161461a7590768', 1)
       setCookie('CNZZDATA1254948863', '1737149624-1517296854-https%253A%252F%252Fwww.baidu.com%252F%7C1517640618', 1)
       this.SET_TITLE('卖座电影')
+      this.SET_CITY(item.name)
       this.$router.push({path: '/'})
     },
     ...mapMutations({
-      SET_TITLE: 'SET_TITLE'
+      SET_TITLE: 'SET_TITLE',
+      SET_CITY: 'SET_CITY'
     })
   }
 }

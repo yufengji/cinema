@@ -1,7 +1,7 @@
 <template>
   <div class="film-list" v-if="filmData.length">
     <ul>
-      <li v-for="(item, index) in filmData" :key="index">
+      <li v-for="(item, index) in filmData" :key="index" @click="goDetail(item.id)">
         <div class="film-item">
           <div class="film-item-img">
             <img :src="item.poster.origin" />
@@ -50,6 +50,9 @@ export default{
       if (isBottom()) {
         this.$emit('getMore')
       }
+    },
+    goDetail (id) {
+      this.$router.push({path: '/film/' + id, params: {id: id}})
     },
     formatDate (d) {
       let _w = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
