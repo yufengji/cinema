@@ -96,7 +96,6 @@ export default {
           }
           return
         } else if (res.status === 0) {
-          console.log(res)
           setCookie('isMainAccount', res.data.data.isMainAccount, 1)
           setCookie('mobile', res.data.data.mobile, 1)
           setCookie('sessionKey', res.data.data.sessionKey, 1)

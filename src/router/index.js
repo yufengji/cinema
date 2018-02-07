@@ -9,6 +9,7 @@ import Detail from '@/components/detail/detail'
 import Cinema from '@/components/cinema/cinema'
 import Login from '@/components/login/login'
 import Center from '@/components/center/center'
+import Seats from '@/components/seats/seats'
 Vue.use(Router)
 
 export default new Router({
@@ -56,6 +57,10 @@ export default new Router({
     {
       path: '/center',
       component: Center
+    },
+    {
+      path: '/seats',
+      component: Seats
     }
   ]
 })
