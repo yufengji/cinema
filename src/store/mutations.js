@@ -5,6 +5,9 @@ const mutations = {
   },
   [types.SET_CITY] (state, city) {
     state.city = city
+  },
+  [types.SET_GO_SEATS] (state, goseats) {
+    state.goseats = goseats
   }
 }
 export default mutations

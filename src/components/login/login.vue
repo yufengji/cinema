@@ -29,10 +29,15 @@
 import MHeader from '@/components/header/header'
 import {code, loginValideta, captcha} from '@/api/login.js'
 import {setCookie, getCookie} from '@/common/js/cookie.js'
-import {mapMutations} from 'vuex'
+import {mapMutations, mapGetters} from 'vuex'
 export default {
   components: {
     MHeader
+  },
+  computed: {
+    ...mapGetters([
+      'goseats'
+    ])
   },
   data () {
     return {
@@ -101,10 +106,16 @@ export default {
           setCookie('sessionKey', res.data.data.sessionKey, 1)
           setCookie('userId', res.data.data.id, 1)
           setCookie('userName', res.data.data.name, 1)
-          this.SET_TITLE('我的')
-          this.$router.push({
-            path: '/center'
-          })
+          if (!this.goseats) {
+            // 跳转到我的中心
+            this.SET_TITLE('我的')
+            this.$router.push({
+              path: '/center'
+            })
+          } else {
+            // 跳转到选择座位 通过场次id选择座位
+            console.log('adf')
+          }
         }
       })
     },

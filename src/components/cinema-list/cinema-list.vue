@@ -167,12 +167,14 @@ export default {
     },
     chooseSit () {
       this.SET_TITLE('登录')
+      this.SET_GO_SEATS(true)
       this.$router.push({
         path: '/login'
       })
     },
     ...mapMutations({
-      SET_TITLE: 'SET_TITLE'
+      SET_TITLE: 'SET_TITLE',
+      SET_GO_SEATS: 'SET_GO_SEATS'
     })
   }
 }
