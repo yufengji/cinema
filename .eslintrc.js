@@ -29,6 +29,7 @@ module.exports = {
     'eol-last': 0,
     'space-before-function-paren': 0,
     "no-tabs": "off",
-    "no-irregular-whitespace": 0
+    "no-irregular-whitespace": 0,
+    'no-useless-return': 0
   }
 }

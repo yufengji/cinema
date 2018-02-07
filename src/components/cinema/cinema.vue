@@ -1,6 +1,6 @@
 <template>
   <div class="cinema">
-    <cinema-list :cinema="cinema" :filmid="this.$route.params.id"></cinema-list>
+    <cinema-list :cinema="cinema" :filmid="filmid"></cinema-list>
   </div>
 </template>
 <script>
@@ -9,10 +9,12 @@ import CinemaList from '@/components/cinema-list/cinema-list.vue'
 export default {
   created () {
     this._getCinema()
+    this.filmid = this.$route.params.id
   },
   data () {
     return {
-      cinema: []
+      cinema: [],
+      filmid: 0
     }
   },
   components: {

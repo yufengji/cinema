@@ -7,6 +7,8 @@ import ComingSoon from '@/components/coming-soon/coming-soon'
 import Film from '@/components/film/film'
 import Detail from '@/components/detail/detail'
 import Cinema from '@/components/cinema/cinema'
+import Login from '@/components/login/login'
+import Center from '@/components/center/center'
 Vue.use(Router)
 
 export default new Router({
@@ -46,6 +48,14 @@ export default new Router({
           component: Cinema
         }
       ]
+    },
+    {
+      path: '/login',
+      component: Login
+    },
+    {
+      path: '/center',
+      component: Center
     }
   ]
 })

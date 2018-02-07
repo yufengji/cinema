@@ -22,7 +22,7 @@
             </div>
             <div class="schedule-time">
               <ul v-for="(item4, index4) in item2.schedule" :key="index4" v-if="index4 === currentIndex">
-                <li v-for="(item5, index5) in item4.items" :key="index5">
+                <li v-for="(item5, index5) in item4.items" :key="index5" @click="chooseSit">
                   <div class="s-t-l">
                     <p>{{formatDate(item5.showAt)}}</p>
                     <p class="end">预计{{formatDate(item5.showAt + item5.film.mins*60*1000)}}结束/{{item5.imagery}}/{{item5.hall.name}}</p>
@@ -45,6 +45,7 @@
 import Vue from 'vue'
 import {schedule} from '@/api/cinema.js'
 import {addClass, hasClass, removeClass} from '@/common/js/dom.js'
+import {mapMutations} from 'vuex'
 export default {
   data () {
     return {
@@ -60,7 +61,7 @@ export default {
       }
     },
     filmid: {
-      type: Number,
+      type: [Number, String],
       default: 0
     }
   },
@@ -163,10 +164,16 @@ export default {
           }
         }
       }
-
-      console.log(this.cinema)
-      // return ret
-    }
+    },
+    chooseSit () {
+      this.SET_TITLE('登录')
+      this.$router.push({
+        path: '/login'
+      })
+    },
+    ...mapMutations({
+      SET_TITLE: 'SET_TITLE'
+    })
   }
 }
 </script>

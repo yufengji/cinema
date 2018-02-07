@@ -17,12 +17,19 @@
 </template>
 <script>
 import MHeader from '@/components/header/header'
+import {getCookie} from '@/common/js/cookie.js'
+import {mapMutations} from 'vuex'
 export default {
   components: {
     MHeader
   },
+  created () {
+    this.SET_CITY(getCookie('cityName'))
+  },
   methods: {
-
+    ...mapMutations({
+      SET_CITY: 'SET_CITY'
+    })
   }
 }
 </script>

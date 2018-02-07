@@ -62,7 +62,9 @@
 import MHeader from '@/components/header/header'
 import Swipe from '@/base/swipe/swipe'
 import {billboard} from '@/api/home.js'
+import {getCookie} from '@/common/js/cookie.js'
 import {nowPlaying, comingSoon} from '@/api/nowPlaying.js'
+import {mapMutations} from 'vuex'
 export default {
   components: {
     MHeader,
@@ -81,6 +83,7 @@ export default {
     this._getBillBoards()
     this._getNowPlaying()
     this._getComingSoon()
+    this.SET_CITY(getCookie('cityName'))
   },
   methods: {
     _getBillBoards () {
@@ -109,7 +112,10 @@ export default {
       let month = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1)
       let day = date.getDate()
       return `${month}月${day}日上映`
-    }
+    },
+    ...mapMutations({
+      SET_CITY: 'SET_CITY'
+    })
   }
 }
 </script>

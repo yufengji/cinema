@@ -1,7 +1,7 @@
 <template>
   <div class="film-list" v-if="filmData.length">
     <ul>
-      <li v-for="(item, index) in filmData" :key="index" @click="goDetail(item.id)">
+      <li v-for="(item, index) in filmData" :key="index" @click="goDetail(item)">
         <div class="film-item">
           <div class="film-item-img">
             <img :src="item.poster.origin" />
@@ -22,6 +22,7 @@
 </template>
 <script>
 import {isBottom} from '@/common/js/scrollBottom.js'
+import {mapMutations} from 'vuex'
 export default{
   props: {
     filmData: {
@@ -51,8 +52,9 @@ export default{
         this.$emit('getMore')
       }
     },
-    goDetail (id) {
-      this.$router.push({path: '/film/' + id, params: {id: id}})
+    goDetail (item) {
+      this.SET_TITLE(item.name)
+      this.$router.push({path: '/film/' + item.id, params: {id: item.id}})
     },
     formatDate (d) {
       let _w = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
@@ -61,7 +63,10 @@ export default{
       let day = date.getDate()
       let week = _w[date.getDay()]
       return `${month}月${day}日上映 ${week}`
-    }
+    },
+    ...mapMutations({
+      SET_TITLE: 'SET_TITLE'
+    })
   }
 }
 </script>
