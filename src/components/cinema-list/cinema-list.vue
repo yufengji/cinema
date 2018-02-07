@@ -18,17 +18,18 @@
           </div>
           <div class="bottom" v-if="item2.schedule">
             <div class="schedule-top">
-              <span href="javascript:;" class="active" v-for="(item3, index3) in item2.schedule" :key="index3">{{item3.title}}</span>
+              <span href="javascript:;" :class="{'active': index3 === currentIndex}" v-for="(item3, index3) in item2.schedule" :key="index3" @click="showTiemSchedule(index3)">{{item3.title}}</span>
             </div>
             <div class="schedule-time">
               <ul v-for="(item4, index4) in item2.schedule" :key="index4" v-if="index4 === currentIndex">
                 <li v-for="(item5, index5) in item4.items" :key="index5">
                   <div class="s-t-l">
-                    <p>17:10</p>
-                    <p class="end">预计</p>
+                    <p>{{formatDate(item5.showAt)}}</p>
+                    <p class="end">预计{{formatDate(item5.showAt + item5.film.mins*60*1000)}}结束/{{item5.imagery}}/{{item5.hall.name}}</p>
                   </div>
                   <div class="s-t-r">
-                    <strong>￥25</strong>
+                    <strong>￥{{item5.price.maizuo}}</strong>
+                    <span>￥{{item5.price.cinema}}</span>
                   </div>
                   <i class="iconfont icon-right"></i>
                 </li>
@@ -59,21 +60,33 @@ export default {
       }
     },
     filmid: {
-      type: String,
-      default: ''
+      type: Number,
+      default: 0
     }
   },
   methods: {
+    formatDate (d) {
+      let date = new Date(d)
+      let hours = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours())
+      let minutes = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes())
+      return `${hours}:${minutes}`
+    },
+    showTiemSchedule (index) {
+      this.currentIndex = index
+    },
     showCinema (index) {
       let _element = this.$refs.ListGroup[index].getElementsByClassName('content')[0]
-      let _height = _element.getElementsByClassName('cinema-wrap')[0].offsetHeight
-      let _len = _element.getElementsByClassName('cinema-wrap').length
+      let _cinemaWrap = _element.getElementsByClassName('cinema-wrap')
+      let _height = 0
+      for (let i = 0; i < _cinemaWrap.length; i++) {
+        _height += _element.getElementsByClassName('cinema-wrap')[i].offsetHeight
+      }
       let _h = 0
       if (hasClass(_element, 'show')) {
         _h = 0
         removeClass(_element, 'show')
       } else {
-        _h = _height * _len
+        _h = _height
         addClass(_element, 'show')
       }
       _element.style.height = _h + 'px'
@@ -106,6 +119,7 @@ export default {
           if (!timeMap[key]) {
             timeMap[key] = {
               title: '今天',
+              sort: 'a',
               items: []
             }
           }
@@ -115,6 +129,7 @@ export default {
           if (!timeMap[key]) {
             timeMap[key] = {
               title: '明天',
+              sort: 'b',
               items: []
             }
           }
@@ -124,6 +139,7 @@ export default {
           if (!timeMap[key]) {
             timeMap[key] = {
               title: '后天',
+              sort: 'c',
               items: []
             }
           }
@@ -136,8 +152,9 @@ export default {
         ret.push(val)
       }
       ret.sort((a, b) => {
-        return a.title.charCodeAt(0) - b.title.charCodeAt(0)
+        return a.sort.charCodeAt(0) - b.sort.charCodeAt(0)
       })
+      console.log(ret)
       for (let i = 0; i < this.cinema.length; i++) {
         let obj = this.cinema[i]
         for (let ii = 0; ii < obj.items.length; ii++) {
@@ -267,4 +284,12 @@ export default {
                 color: #fc8637
                 strong
                   line-height: 60px
+                  height: 60px
+                  display: inline-block
+                span
+                  color: #959595
+                  font-size: 28px
+                  display: inline-block
+                  text-decoration: line-through
+                  padding-top: 15px
 </style>

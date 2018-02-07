@@ -33,6 +33,7 @@ export default {
         if (!map[key]) {
           map[key] = {
             title: key,
+            pinyin: item.district.pinyin,
             items: []
           }
         }
@@ -43,7 +44,11 @@ export default {
         let val = map[key]
         ret.push(val)
       }
-      return ret.sort()
+      console.log(ret)
+      ret.sort((a, b) => {
+        return a.pinyin.charCodeAt(0) - b.pinyin.charCodeAt(0)
+      })
+      return ret
     }
   }
 }
