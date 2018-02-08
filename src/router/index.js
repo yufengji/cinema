@@ -59,7 +59,8 @@ export default new Router({
       component: Center
     },
     {
-      path: '/seats',
+      path: '/seats/:scheduleid',
+      name: 'scheduleDetail',
       component: Seats
     }
   ]

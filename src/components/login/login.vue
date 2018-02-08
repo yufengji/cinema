@@ -36,7 +36,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'goseats'
+      'goseats',
+      'scheduleid'
     ])
   },
   data () {
@@ -114,7 +115,11 @@ export default {
             })
           } else {
             // 跳转到选择座位 通过场次id选择座位
-            console.log('adf')
+            this.$router.push({
+              name: 'scheduleDetail',
+              params: {scheduleid: this.scheduleid}
+            })
+            console.log(this.scheduleid)
           }
         }
       })

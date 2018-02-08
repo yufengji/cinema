@@ -8,6 +8,9 @@ const mutations = {
   },
   [types.SET_GO_SEATS] (state, goseats) {
     state.goseats = goseats
+  },
+  [types.SET_SCHEDULE_ID] (state, scheduleid) {
+    state.scheduleid = scheduleid
   }
 }
 export default mutations

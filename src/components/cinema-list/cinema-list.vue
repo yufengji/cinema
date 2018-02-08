@@ -22,7 +22,7 @@
             </div>
             <div class="schedule-time">
               <ul v-for="(item4, index4) in item2.schedule" :key="index4" v-if="index4 === currentIndex">
-                <li v-for="(item5, index5) in item4.items" :key="index5" @click="chooseSit">
+                <li v-for="(item5, index5) in item4.items" :key="index5" @click="chooseSit(item5)">
                   <div class="s-t-l">
                     <p>{{formatDate(item5.showAt)}}</p>
                     <p class="end">预计{{formatDate(item5.showAt + item5.film.mins*60*1000)}}结束/{{item5.imagery}}/{{item5.hall.name}}</p>
@@ -165,16 +165,18 @@ export default {
         }
       }
     },
-    chooseSit () {
+    chooseSit (item) {
       this.SET_TITLE('登录')
       this.SET_GO_SEATS(true)
+      this.SET_SCHEDULE_ID(item.id)
       this.$router.push({
         path: '/login'
       })
     },
     ...mapMutations({
       SET_TITLE: 'SET_TITLE',
-      SET_GO_SEATS: 'SET_GO_SEATS'
+      SET_GO_SEATS: 'SET_GO_SEATS',
+      SET_SCHEDULE_ID: 'SET_SCHEDULE_ID'
     })
   }
 }
