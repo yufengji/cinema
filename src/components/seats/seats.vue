@@ -16,15 +16,18 @@
         <div class="screen">
           <span v-if="info">{{info.hall.name}}</span>银幕方向
         </div>
-        <div class="sit">
+        <div class="sit" v-if="seats.length">
           <div class="rowtip" v-if="rownum">
             <div v-for="(item, index) in rownum" :key="index" :style="{width: '25px', height:'25px', top: index * 25 + 'px' }">{{item + 1}}</div>
           </div>
           <div class="seat-order" :style="{width: cloumn * 25 + 'px', marginLeft: (-cloumn * 12.5) + 'px'}">
             <div v-for="(item, index) in seats" :key="index" :data-seat-row="item.row" :data-seat-cloumn="item.column" class="seat" :class="{'haspeople': item.isOccupied}" :style="{width:'20px', height:'20px', top: (item.row - 1) * 25 + 'px', left: (item.column -1) * 25 + 'px'}" @click="chooseSit(item, $event)"></div>
           </div>
-          <loading v-if="!seats.length" :hasmore="hasmore"></loading>
         </div>
+        <div class="sit-error" v-if="errormsg != ''">
+          <span>{{errormsg}}</span><a href="javascript:;" @click="_getScheduleSit">点击刷新</a>
+        </div>
+        <loading v-if="!seats.length && errormsg === ''" :hasmore="hasmore"></loading>
       </div>
     </div>
     <div class="choose-sit-info">
@@ -47,7 +50,7 @@
 import MHeader from '@/components/header/header'
 import Loading from '@/base/loading/loading'
 import {seatingChart, scheduleDetail} from '@/api/cinema.js'
-import {mapGetters} from 'vuex'
+import {mapGetters, mapMutations} from 'vuex'
 import {addClass, hasClass, removeClass, removeArray} from '@/common/js/dom.js'
 export default {
   components: {
@@ -67,7 +70,8 @@ export default {
       },
       myseats: [],
       allprice: 0,
-      price: 0
+      price: 0,
+      errormsg: ''
     }
   },
   computed: {
@@ -85,10 +89,14 @@ export default {
         if (res.status === 0) {
           this.info = res.data.schedule
           this.price = res.data.schedule.price.maizuo
+          this.SET_TITLE(res.data.schedule.film.name)
         }
       })
     },
     _getScheduleSit () {
+      if (this.errormsg !== '') {
+        this.errormsg = ''
+      }
       seatingChart(this.$route.params.scheduleid).then((res) => {
         if (res.status === 0) {
           let num = res.data.seatingChart.height
@@ -98,6 +106,8 @@ export default {
             this.rownum.push(i)
           }
           this.seats = res.data.seatingChart.seats
+        } else if (res.status !== 0) {
+          this.errormsg = res.msg
         }
       })
     },
@@ -129,7 +139,10 @@ export default {
         this.myseats.push({'row': item.row, 'column': item.column})
         this.allprice = this.price * this.myseats.length
       }
-    }
+    },
+    ...mapMutations({
+      SET_TITLE: 'SET_TITLE'
+    })
   }
 }
 </script>
@@ -240,6 +253,13 @@ export default {
                 text-align: center
                 position: absolute
                 top: -2px
+        .sit-error
+          text-align: center
+          font-size: 28px
+          margin-top: 120px
+          a
+            text-decoration: underline
+            color: #2626f2
     .choose-sit-info
       width: 100%
       height: 230px

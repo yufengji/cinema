@@ -6,7 +6,8 @@
       <div class="form-input">
         <input type="text" placeholder="输入手机号" v-model="tel" @keyup="checkTel($event)" maxlength="11">
         <div class="send-yzm" v-if="vetifyflag" @click="sendCode">
-          <a href="javascript:;">发送验证码</a>
+          <a v-if="!sendresult" href="javascript:;">发送验证码</a>
+          <span v-if="sendresult" href="javascript:;">{{yzmtip}}</span>
           <i class="angle"></i>
         </div>
       </div>
@@ -52,7 +53,9 @@ export default {
         url: '',
         key: ''
       },
-      codeval: ''
+      codeval: '',
+      yzmtip: '发送验证码',
+      sendresult: false
     }
   },
   created () {
@@ -72,13 +75,27 @@ export default {
       code(this.tel, this.type).then((res) => {
         if (res.status === 0) {
           this.code = true
+          this.sendresult = true
+          this.cutDown()
           return
         }
         if (res.status === -23107) {
           this.error = res.msg
+          this.sendresult = false
           return
         }
       })
+    },
+    cutDown () {
+      let time = 60
+      let timer = setInterval(() => {
+        time--
+        if (time <= 0) {
+          this.sendresult = false
+          clearInterval(timer)
+        }
+        this.yzmtip = `${time}秒后重发`
+      }, 1000)
     },
     login () {
       if (!this.vetifyflag) {
@@ -165,7 +182,7 @@ export default {
         text-align: center
         border-radius: 6px
         cursor: pointer
-        a
+        a,span
           display: block
           width: 100%
           height: 100%

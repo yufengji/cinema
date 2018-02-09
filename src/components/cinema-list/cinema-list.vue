@@ -39,6 +39,7 @@
         </div>
       </div>
     </div>
+    <loading v-if="!cinema.length"></loading>
   </div>
 </template>
 <script>
@@ -46,7 +47,12 @@ import Vue from 'vue'
 import {schedule} from '@/api/cinema.js'
 import {addClass, hasClass, removeClass} from '@/common/js/dom.js'
 import {mapMutations} from 'vuex'
+import {getCookie} from '@/common/js/cookie.js'
+import Loading from '@/base/loading/loading'
 export default {
+  components: {
+    Loading
+  },
   data () {
     return {
       sheduleTime: [],
@@ -166,9 +172,18 @@ export default {
       }
     },
     chooseSit (item) {
-      this.SET_TITLE('登录')
       this.SET_GO_SEATS(true)
       this.SET_SCHEDULE_ID(item.id)
+      if (getCookie('isMainAccount')) {
+        // 已登录跳转到选择座位 通过场次id选择座位
+        this.SET_TITLE(item.film.name)
+        this.$router.push({
+          name: 'scheduleDetail',
+          params: {scheduleid: item.id}
+        })
+        return
+      }
+      this.SET_TITLE('登录')
       this.$router.push({
         path: '/login'
       })
