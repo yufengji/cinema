@@ -10,6 +10,8 @@ import Cinema from '@/components/cinema/cinema'
 import Login from '@/components/login/login'
 import Center from '@/components/center/center'
 import Seats from '@/components/seats/seats'
+import AllCinema from '@/components/cinema/all-cinema'
+import CinemaDetail from '@/components/cinema-detail/cinema-detail'
 Vue.use(Router)
 
 export default new Router({
@@ -62,6 +64,15 @@ export default new Router({
       path: '/seats/:scheduleid',
       name: 'scheduleDetail',
       component: Seats
+    },
+    {
+      path: '/allcinema',
+      component: AllCinema
+    },
+    {
+      path: '/allcinema/:cinemaid',
+      name: 'detailcinema',
+      component: CinemaDetail
     }
   ]
 })

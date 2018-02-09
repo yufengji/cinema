@@ -10,10 +10,10 @@
             <div class="cinema-wrap-left">
               <h6>{{item2.name}}</h6>
               <p>{{item2.address}}</p>
-              <p>距离未知 | 剩余{{item2.avaliableSchedule}}场</p>
+              <p>距离未知 <span v-if="showpflag">| 剩余{{item2.avaliableSchedule}}场</span></p>
             </div>
             <div class="cinema-wrap-right">
-              <strong>￥{{item2.minimumPrice}}</strong>
+              <strong v-if="showpflag">￥{{item2.minimumPrice}}</strong>
             </div>
           </div>
           <div class="bottom" v-if="item2.schedule || item2.noschedule">
@@ -48,6 +48,10 @@ export default {
     filmid: {
       type: [Number, String],
       default: 0
+    },
+    showpflag: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {

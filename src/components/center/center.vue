@@ -65,7 +65,7 @@
 </template>
 <script>
 import MHeader from '@/components/header/header'
-import {deleteCookie} from '@/common/js/cookie.js'
+import {deleteCookie, getCookie} from '@/common/js/cookie.js'
 import {me} from '@/api/user.js'
 export default {
   components: {
@@ -77,9 +77,17 @@ export default {
     }
   },
   created () {
+    this._isLogin()
     this._getMe()
   },
   methods: {
+    _isLogin () {
+      if (!getCookie('isMainAccount')) {
+        this.$router.push({
+          path: '/login'
+        })
+      }
+    },
     _getMe() {
       me().then((res) => {
         if (res.status === 0) {

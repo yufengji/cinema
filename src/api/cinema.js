@@ -22,6 +22,28 @@ export function areacinema () {
     return Promise.resolve(res.data)
   })
 }
+export function cinemadetail (cinemaid) {
+  const url = 'api/cinema/' + cinemaid
+  const data = Object.assign({
+    _t: 1517477555442
+  })
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+    return Promise.resolve(res.data)
+  })
+}
+export function cinemaitem (cinemaid) {
+  const url = 'api/cinema/' + cinemaid + '/item'
+  const data = Object.assign({
+    _t: 1517477555442
+  })
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+    return Promise.resolve(res.data)
+  })
+}
 export function schedule (film, cinema) {
   const url = 'api/schedule'
   const data = Object.assign({

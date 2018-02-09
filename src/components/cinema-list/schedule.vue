@@ -2,13 +2,13 @@
   <div class="schedule">
     <div class="has-schedule" v-if="schedule.length">
       <div class="schedule-top">
-        <span href="javascript:;" :class="{'active': index3 === currentIndex}" v-for="(item, index) in schedule" :key="index" @click="showTiemSchedule(index)">{{item.title}}</span>
+        <span href="javascript:;" :class="{'active': index === currentIndex}" v-for="(item, index) in schedule" :key="index" @click="showTiemSchedule(index)">{{item.title}}</span>
       </div>
       <div class="schedule-time">
-        <ul v-for="(item, index) in item.schedule" :key="index" v-if="index === currentIndex">
+        <ul v-for="(item, index) in schedule" :key="index" v-if="index === currentIndex">
           <li v-for="(item2, index2) in item.items" :key="index2" @click="chooseSit(item2)">
             <div class="s-t-l">
-              <p>{{formatDate(item5.showAt)}}</p>
+              <p>{{formatDate(item2.showAt)}}</p>
               <p class="end">预计{{formatDate(item2.showAt + item2.film.mins*60*1000)}}结束/{{item2.imagery}}/{{item2.hall.name}}</p>
             </div>
             <div class="s-t-r">

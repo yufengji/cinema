@@ -6,8 +6,8 @@
         <ul>
           <li><router-link to="/home">首页</router-link><i class="iconfont icon-right"></i></li>
           <li><router-link to="/film">影片</router-link><i class="iconfont icon-right"></i></li>
-          <li><a href="javascript:;">影院</a><i class="iconfont icon-right"></i></li>
-          <li><a href="javascript:;">我的</a><i class="iconfont icon-right"></i></li>
+          <li><router-link to="/allcinema">影院</router-link><i class="iconfont icon-right"></i></li>
+          <li><router-link to="/center">我的</router-link><i class="iconfont icon-right"></i></li>
           <li><a href="javascript:;">卖座卡</a><i class="iconfont icon-right"></i></li>
         </ul>
       </div>
