@@ -119,11 +119,11 @@ export default {
           }
           return
         } else if (res.status === 0) {
-          setCookie('isMainAccount', res.data.data.isMainAccount, 1)
-          setCookie('mobile', res.data.data.mobile, 1)
-          setCookie('sessionKey', res.data.data.sessionKey, 1)
-          setCookie('userId', res.data.data.id, 1)
-          setCookie('userName', res.data.data.name, 1)
+          setCookie('isMainAccount', res.data.data.isMainAccount, 1 / 24)
+          setCookie('mobile', res.data.data.mobile, 1 / 24)
+          setCookie('sessionKey', res.data.data.sessionKey, 1 / 24)
+          setCookie('userId', res.data.data.id, 1 / 24)
+          setCookie('userName', res.data.data.name, 1 / 24)
           if (!this.goseats) {
             // 跳转到我的中心
             this.SET_TITLE('我的')
