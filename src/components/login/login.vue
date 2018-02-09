@@ -136,7 +136,6 @@ export default {
               name: 'scheduleDetail',
               params: {scheduleid: this.scheduleid}
             })
-            console.log(this.scheduleid)
           }
         }
       })

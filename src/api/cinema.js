@@ -11,6 +11,17 @@ export function cinema (id) {
     return Promise.resolve(res.data)
   })
 }
+export function areacinema () {
+  const url = 'api/cinema'
+  const data = Object.assign({
+    _t: 1517477555442
+  })
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+    return Promise.resolve(res.data)
+  })
+}
 export function schedule (film, cinema) {
   const url = 'api/schedule'
   const data = Object.assign({
