@@ -29,13 +29,12 @@
     </div>
     <div class="choose-sit-info">
       <div class="sit-show">
-        <span>5排3座</span>
-        <span>5排3座</span>
+        <span v-for="(item, index) in myseats" :key="index">{{item.row}}排{{item.column}}座</span>
       </div>
       <div class="price">
         <div class="price-left">
-          <p>￥33.00</p>
-          <span>=￥33X1</span>
+          <p>￥{{allprice}}</p>
+          <span>=￥{{price}}X{{myseats.length}}</span>
         </div>
         <div class="price-right">
           确认
@@ -49,7 +48,7 @@ import MHeader from '@/components/header/header'
 import Loading from '@/base/loading/loading'
 import {seatingChart, scheduleDetail} from '@/api/cinema.js'
 import {mapGetters} from 'vuex'
-import {addClass, hasClass, removeClass} from '@/common/js/dom.js'
+import {addClass, hasClass, removeClass, removeArray} from '@/common/js/dom.js'
 export default {
   components: {
     MHeader,
@@ -66,7 +65,9 @@ export default {
         flag: true,
         tip: '正在加载座位'
       },
-      myseats: []
+      myseats: [],
+      allprice: 0,
+      price: 0
     }
   },
   computed: {
@@ -83,6 +84,7 @@ export default {
       scheduleDetail(this.$route.params.scheduleid).then((res) => {
         if (res.status === 0) {
           this.info = res.data.schedule
+          this.price = res.data.schedule.price.maizuo
         }
       })
     },
@@ -101,7 +103,7 @@ export default {
     },
     formatDate (d) {
       let date = new Date(d)
-      let year = date.getYear()
+      let year = date.getFullYear()
       let month = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1)
       let day = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate())
       let hours = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours())
@@ -114,8 +116,18 @@ export default {
       }
       if (hasClass(event.currentTarget, 'choose')) {
         removeClass(event.currentTarget, 'choose')
+        if (this.myseats.length) {
+          this.myseats.forEach((val, index) => {
+            if (val.row === item.row && val.column === item.column) {
+              this.myseats = removeArray(index, this.myseats)
+              this.allprice = this.price * this.myseats.length
+            }
+          })
+        }
       } else {
         addClass(event.currentTarget, 'choose')
+        this.myseats.push({'row': item.row, 'column': item.column})
+        this.allprice = this.price * this.myseats.length
       }
     }
   }
@@ -238,6 +250,7 @@ export default {
       .sit-show
         padding: 30px 40px
         overflow: hidden
+        min-height: 50px
         border-bottom: 1px solid #cccccc
         border-top: 1px solid #cccccc
         span

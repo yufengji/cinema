@@ -20,3 +20,12 @@ export function removeClass (el, className) {
   }
   el.className = newClass.join(' ')
 }
+export function removeArray (index, arr) {
+  let newArr = []
+  for (let i = 0; i < arr.length; i++) {
+    if (i !== index) {
+      newArr.push(arr[i])
+    }
+  }
+  return newArr
+}

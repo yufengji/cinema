@@ -20,7 +20,7 @@ export default {
       nowplaying: [],
       page: 1,
       count: 5,
-      totalpage: 1,
+      totalpage: 2,
       hasmore: {
         flag: true,
         tip: '正在加载'
