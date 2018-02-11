@@ -53,3 +53,16 @@ module.exports = {
   }
 
 }
+
+### 项目截图
+![](https://github.com/yufengji/cinema/blob/master/static/project-pic/home.jpg?raw=true)
+![](https://github.com/yufengji/cinema/blob/master/static/project-pic/pic10.jpg?raw=true)
+![](https://github.com/yufengji/cinema/blob/master/static/project-pic/pic01.jpg?raw=true)
+![](https://github.com/yufengji/cinema/blob/master/static/project-pic/pic02.jpg?raw=true)
+![](https://github.com/yufengji/cinema/blob/master/static/project-pic/pic03.jpg?raw=true)
+![](https://github.com/yufengji/cinema/blob/master/static/project-pic/pic04.jpg?raw=true)
+![](https://github.com/yufengji/cinema/blob/master/static/project-pic/pic05.jpg?raw=true)
+![](https://github.com/yufengji/cinema/blob/master/static/project-pic/pic06.jpg?raw=true)
+![](https://github.com/yufengji/cinema/blob/master/static/project-pic/pic07.jpg?raw=true)
+![](https://github.com/yufengji/cinema/blob/master/static/project-pic/pic08.jpg?raw=true)
+![](https://github.com/yufengji/cinema/blob/master/static/project-pic/pic09.jpg?raw=true)
