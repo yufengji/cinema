@@ -13,9 +13,9 @@
         <span class="city-content">{{city}}</span>
         <i class="iconfont icon-zhankai"></i>
       </a>
-      <a href="javascript:;" class="user">
+      <router-link class="user" to="/center">
         <i class="iconfont icon-yonghu"></i>
-      </a>
+      </router-link>
     </div>
     <h-aside ref="Asides" v-if="showasideflag"></h-aside>
   </div>
