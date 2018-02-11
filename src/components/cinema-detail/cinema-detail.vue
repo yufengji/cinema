@@ -17,10 +17,12 @@
         <a class="btn-ticket" href="javascript:;">立即订票</a>
       </div>
       <div class="box address">
+        <p>地址</p>
         <p v-if="cinemadetail">{{cinemadetail.address}}</p>
       </div>
       <div class="box address">
-        <p v-if="cinemadetail">{{cinemadetail.telephones}}</p>
+        <p>电话</p>
+        <p v-if="cinemadetail">{{cinemadetail.telephones[0]}}</p>
       </div>
     </div>
   </div>
