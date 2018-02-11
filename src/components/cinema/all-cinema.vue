@@ -9,8 +9,10 @@
 import MHeader from '@/components/header/header'
 import CinemaList from '@/components/cinema-list/cinema-list.vue'
 import {areacinema} from '@/api/cinema.js'
+import {mapMutations} from 'vuex'
 export default {
   created () {
+    this.SET_TITLE('全部影院')
     this._getAreaCinema()
   },
   components: {
@@ -61,7 +63,10 @@ export default {
           cinemaid: item.id
         }
       })
-    }
+    },
+    ...mapMutations({
+      SET_TITLE:'SET_TITLE'
+    })
   }
 }
 </script>
