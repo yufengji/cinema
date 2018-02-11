@@ -1,6 +1,6 @@
 # cinema
 
-> A Vue.js project
+> 通过vue重写卖座网，仅供学习用途，没有进入真正的订单页面，望卖座网海涵
 
 ## Build Setup
 
