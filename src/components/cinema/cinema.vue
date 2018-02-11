@@ -24,6 +24,7 @@ export default {
   },
   methods: {
     showSchdule (item) {
+      console.log(item)
       let _target = event.currentTarget.parentNode
       schedule(this.filmid, item.id).then((res) => {
         if (res.status === 0) {

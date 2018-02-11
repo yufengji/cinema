@@ -6,7 +6,7 @@
     <div class="now-playing">
       <div class="film-list">
         <ul>
-          <li v-for="(item, index) in nowplaying" :key="index">
+          <li v-for="(item, index) in nowplaying" :key="index" @click="goDetail(item)">
             <div class="move-item">
               <div class="move-item-img">
                 <img :src="item.cover.origin" />
@@ -36,7 +36,7 @@
       </div>
       <div class="film-list">
         <ul>
-          <li v-for="(item, index) in comingsoon" :key="index">
+          <li v-for="(item, index) in comingsoon" :key="index" @click="goDetail(item)">
             <div class="move-item">
               <div class="move-item-img" :style="{background: 'url('+ item.cover.origin +') no-repeat', backgroundSize: 'cover'}">
               </div>
@@ -113,8 +113,13 @@ export default {
       let day = date.getDate()
       return `${month}月${day}日上映`
     },
+    goDetail (item) {
+      this.SET_TITLE(item.name)
+      this.$router.push({path: '/film/' + item.id, params: {id: item.id}})
+    },
     ...mapMutations({
-      SET_CITY: 'SET_CITY'
+      SET_CITY: 'SET_CITY',
+      SET_TITLE: 'SET_TITLE'
     })
   }
 }

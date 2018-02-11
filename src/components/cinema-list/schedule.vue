@@ -20,7 +20,10 @@
         </ul>
       </div>
     </div>
-    <div class=""  v-if="noschedule">
+    <div v-if="!schedule.length && !noschedule">
+      <p style="text-align: center;line-height:50px">最近三天暂无排期</p>
+    </div>
+    <div v-if="noschedule">
       <p style="text-align: center;line-height:50px">当前影院暂无排期</p>
     </div>
   </div>
