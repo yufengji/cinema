@@ -18,4 +18,38 @@ npm run build
 npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## 技术栈
+vue2.0+vuex+axios+router(vue全家桶)+es2015(es6)
+
+## 代理设置
+直接请求接口，会出现跨域问题，所以中间加了一层server端，通过本地代理转发到server，然后才去请求真实的api
+
+在config文件夹下的index.js进行配置
+
+module.exports = {
+
+  dev: {
+
+    proxyTable: {
+
+      "/api":{
+
+        "target": "https://m.maizuo.com/v4/api/",
+
+        "secure": false,
+
+        "changeOrigin": true,
+
+        "pathRewrite": {
+
+          "^/api" : ""
+
+        }
+
+      },
+
+    },
+
+  }
+
+}
