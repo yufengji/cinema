@@ -65,7 +65,7 @@ export default {
       })
     },
     ...mapMutations({
-      SET_TITLE:'SET_TITLE'
+      SET_TITLE: 'SET_TITLE'
     })
   }
 }
