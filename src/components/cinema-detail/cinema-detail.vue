@@ -9,7 +9,7 @@
       <div class="box">
         <p>订座票</p>
         <p>选好场次及座位，到影院自助机取票</p>
-        <a class="btn-seat" href="javascript:;">立即订座</a>
+        <a class="btn-seat" href="javascript:;" @click="takeSit">立即订座</a>
       </div>
       <div class="box">
         <p>通兑票</p>
@@ -30,13 +30,15 @@
 <script>
 import MHeader from '@/components/header/header'
 import {cinemadetail, cinemaitem} from '@/api/cinema.js'
+import {mapMutations} from 'vuex'
 export default {
   components: {
     MHeader
   },
   data () {
     return {
-      cinemadetail: null
+      cinemadetail: null,
+      cinemaid: 0
     }
   },
   created () {
@@ -48,6 +50,7 @@ export default {
       cinemadetail(this.$route.params.cinemaid).then((res) => {
         if (res.status === 0) {
           this.cinemadetail = res.data.cinema
+          console.log(res.data.cinema)
         }
       })
     },
@@ -55,7 +58,19 @@ export default {
       cinemaitem(this.$route.params.cinemaid).then((res) => {
         console.log(res)
       })
-    }
+    },
+    takeSit () {
+      this.SET_TITLE(this.cinemadetail.name)
+      this.$router.push({
+        path: '/allcinema/' + this.cinemadetail.id + '/film',
+        params: {
+          cinemaid: this.cinemadetail.id
+        }
+      })
+    },
+    ...mapMutations({
+      SET_TITLE: 'SET_TITLE'
+    })
   }
 }
 </script>

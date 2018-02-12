@@ -12,8 +12,8 @@ import Center from '@/components/center/center'
 import Seats from '@/components/seats/seats'
 import AllCinema from '@/components/cinema/all-cinema'
 import CinemaDetail from '@/components/cinema-detail/cinema-detail'
+import CinemaFilm from '@/components/cinema-film/cinema-film'
 Vue.use(Router)
-
 export default new Router({
   routes: [
     {
@@ -73,6 +73,11 @@ export default new Router({
       path: '/allcinema/:cinemaid',
       name: 'detailcinema',
       component: CinemaDetail
+    },
+    {
+      path: '/allcinema/:cinemaid/film',
+      name: 'cinemafilm',
+      component: CinemaFilm
     }
   ]
 })
