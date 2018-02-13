@@ -5,8 +5,8 @@
     <div class="form">
       <div class="form-input">
         <input type="text" placeholder="输入手机号" v-model="tel" @keyup="checkTel($event)" maxlength="11">
-        <div class="send-yzm" v-if="vetifyflag" @click="sendCode">
-          <a v-if="!sendresult" href="javascript:;">发送验证码</a>
+        <div class="send-yzm" v-if="vetifyflag">
+          <a v-if="!sendresult" href="javascript:;" @click="sendCode">发送验证码</a>
           <span v-if="sendresult" href="javascript:;">{{yzmtip}}</span>
           <i class="angle"></i>
         </div>
@@ -22,7 +22,6 @@
       <div class="form-submit">
         <a href="javascript:;" @click="login">登录</a>
       </div>
-
     </div>
   </div>
 </template>
