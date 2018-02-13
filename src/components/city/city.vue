@@ -38,7 +38,7 @@
 import MHeader from '@/components/header/header'
 import {city} from '@/api/city.js'
 import {down} from '@/common/js/scrollTo.js'
-import {setCookie} from '@/common/js/cookie.js'
+import {setCookie, getCookie} from '@/common/js/cookie.js'
 import {mapMutations} from 'vuex'
 export default {
   components: {
@@ -64,7 +64,11 @@ export default {
   methods: {
     _setMCookie () {
       setCookie('cityId', 34, 1)
-      setCookie('cityName', '厦门', 1)
+      if (getCookie('cityName')) {
+        setCookie('cityName', getCookie('cityName'), 1)
+      } else {
+        setCookie('cityName', '厦门', 1)
+      }
       setCookie('gr_user_id', 'efa2b4ac-6328-4e30-a864-b29b0ba39b49', 1)
       setCookie('gr_session_id_929dfc63e100d573', '39610c21-ee8b-43eb-a5ca-7326dcc9458a', 1)
       setCookie('co', 'maizuo', 1)
