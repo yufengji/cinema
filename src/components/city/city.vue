@@ -8,7 +8,7 @@
       </div>
       <div class="city-container">
         <ul>
-          <li v-for="item2 in item.items" :key="item2.id">{{item2.name}}</li>
+          <li v-for="item2 in item.items" :key="item2.id" @click="setCity(item2)">{{item2.name}}</li>
         </ul>
       </div>
     </div>
@@ -90,7 +90,7 @@ export default {
         }
       }
       list.forEach((item, index) => {
-        if (index < 4) {
+        if (item.id === 13 || item.id === 12 || item.id === 11 || item.id === 10) {
           map.hot.items.push(item)
         }
         const key = item.pinyin.slice(0, 1)

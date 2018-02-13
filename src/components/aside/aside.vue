@@ -1,7 +1,7 @@
 <template>
-  <div class="aside">
+  <div class="aside" ref="Asides">
     <div class="sidebar-container">
-      <div class="sidebar-overlay"></div>
+      <div class="sidebar-overlay" @click="closeASide"></div>
       <div class="nav">
         <ul>
           <li><router-link to="/home">首页</router-link><i class="iconfont icon-right"></i></li>
@@ -15,11 +15,21 @@
   </div>
 </template>
 <script>
+import {removeClass} from '@/common/js/dom.js'
 export default {
   props: {
     showoverlay: {
       type: Boolean,
       default: false
+    }
+  },
+  methods: {
+    closeASide () {
+      const asideEle = this.$refs.Asides
+      removeClass(asideEle, 'aside-show')
+      setTimeout(() => {
+        this.showasideflag = false
+      }, 400)
     }
   }
 }
