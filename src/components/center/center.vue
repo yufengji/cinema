@@ -67,6 +67,7 @@
 import MHeader from '@/components/header/header'
 import {deleteCookie, getCookie} from '@/common/js/cookie.js'
 import {me} from '@/api/user.js'
+import {mapMutations} from 'vuex'
 export default {
   components: {
     MHeader
@@ -86,6 +87,8 @@ export default {
         this.$router.push({
           path: '/login'
         })
+      } else {
+        this.SET_TITLE('个人中心')
       }
     },
     _getMe() {
@@ -104,7 +107,10 @@ export default {
       this.$router.push({
         path: '/login'
       })
-    }
+    },
+    ...mapMutations({
+      SET_TITLE:'SET_TITLE'
+    })
   }
 }
 </script>
