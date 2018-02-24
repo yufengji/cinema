@@ -23,7 +23,7 @@
 <script>
 import {mapGetters, mapMutations} from 'vuex'
 import HAside from '@/components/aside/aside'
-import {getCookie,setCookie} from '@/common/js/cookie.js'
+import {getCookie, setCookie} from '@/common/js/cookie.js'
 import {addClass, hasClass, removeClass} from '@/common/js/dom.js'
 export default {
   computed: {
