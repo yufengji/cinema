@@ -23,7 +23,7 @@
 <script>
 import {mapGetters, mapMutations} from 'vuex'
 import HAside from '@/components/aside/aside'
-import {getCookie} from '@/common/js/cookie.js'
+import {getCookie,setCookie} from '@/common/js/cookie.js'
 import {addClass, hasClass, removeClass} from '@/common/js/dom.js'
 export default {
   computed: {
@@ -41,7 +41,12 @@ export default {
     }
   },
   created () {
-    this.SET_CITY(getCookie('cityName'))
+    if (getCookie('cityName') === '') {
+      setCookie('cityName', '厦门', 1)
+      setCookie('cityId', '34', 1)
+    } else {
+      this.SET_CITY(getCookie('cityName'))
+    }
   },
   methods: {
     goLink () {
