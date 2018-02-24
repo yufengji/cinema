@@ -1,6 +1,7 @@
 import axios from 'axios'
+const root = process.env.API_ROOT
 export function DetailFilm (id) {
-  const url = 'api/film/' + id
+  const url = root + '/film/' + id
   const data = Object.assign({
     _t: 1517477555442
   })
@@ -11,7 +12,7 @@ export function DetailFilm (id) {
   })
 }
 export function CinemaFilm (cinemaid) {
-  const url = 'api/cinema/' + cinemaid + '/film'
+  const url = root + '/cinema/' + cinemaid + '/film'
   const data = Object.assign({
     _t: 1518415239215
   })

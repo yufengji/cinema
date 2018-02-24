@@ -1,6 +1,7 @@
 import axios from 'axios'
+const root = process.env.API_ROOT
 export function nowPlaying (page, count) {
-  const url = 'api/film/now-playing'
+  const url = root + '/film/now-playing'
   const data = Object.assign({
     page: page,
     count: count
@@ -12,7 +13,7 @@ export function nowPlaying (page, count) {
   })
 }
 export function comingSoon (page, count) {
-  const url = 'api/film/coming-soon'
+  const url = root + '/film/coming-soon'
   const data = Object.assign({
     page: page,
     count: count

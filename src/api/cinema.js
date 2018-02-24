@@ -1,7 +1,8 @@
 import axios from 'axios'
 axios.defaults.withCredentials = true
+const root = process.env.API_ROOT
 export function cinema (id) {
-  const url = 'api/film/' + id + '/cinema'
+  const url = root + '/film/' + id + '/cinema'
   const data = Object.assign({
     _t: 1517477555442
   })
@@ -12,7 +13,7 @@ export function cinema (id) {
   })
 }
 export function areacinema () {
-  const url = 'api/cinema'
+  const url = root + '/cinema'
   const data = Object.assign({
     _t: 1517477555442
   })
@@ -23,7 +24,7 @@ export function areacinema () {
   })
 }
 export function cinemadetail (cinemaid) {
-  const url = 'api/cinema/' + cinemaid
+  const url = root + '/cinema/' + cinemaid
   const data = Object.assign({
     _t: 1517477555442
   })
@@ -34,7 +35,7 @@ export function cinemadetail (cinemaid) {
   })
 }
 export function cinemaitem (cinemaid) {
-  const url = 'api/cinema/' + cinemaid + '/item'
+  const url = root + '/cinema/' + cinemaid + '/item'
   const data = Object.assign({
     _t: 1517477555442
   })
@@ -45,7 +46,7 @@ export function cinemaitem (cinemaid) {
   })
 }
 export function schedule (film, cinema) {
-  const url = 'api/schedule'
+  const url = root + '/schedule'
   const data = Object.assign({
     _t: 1517477555442,
     film: film,
@@ -58,7 +59,7 @@ export function schedule (film, cinema) {
   })
 }
 export function seatingChart (scheduleid) {
-  const url = 'api/seating-chart/' + scheduleid
+  const url = root + '/seating-chart/' + scheduleid
   const data = Object.assign({
     _t: 1517477555442
   })
@@ -69,7 +70,7 @@ export function seatingChart (scheduleid) {
   })
 }
 export function scheduleDetail (scheduleid) {
-  const url = 'api/schedule/' + scheduleid
+  const url = root + '/schedule/' + scheduleid
   const data = Object.assign({
     _t: 1517477555442
   })

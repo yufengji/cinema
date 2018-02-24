@@ -1,8 +1,9 @@
 import axios from 'axios'
 import md5 from 'js-md5'
 axios.defaults.withCredentials = true
+const root = process.env.API_ROOT
 export function code (mobile, type) {
-  const url = 'api/code'
+  const url = root + '/code'
   const data = Object.assign({
     mobile: mobile,
     type: type
@@ -12,7 +13,7 @@ export function code (mobile, type) {
   })
 }
 export function loginValideta (code, codeKey, username, pwd) {
-  const url = 'api/login'
+  const url = root + '/login'
   const data = Object.assign({
     code: code,
     codeKey: codeKey,
@@ -25,7 +26,7 @@ export function loginValideta (code, codeKey, username, pwd) {
   })
 }
 export function captcha (username, pwd) {
-  const url = 'api/login/captcha'
+  const url = root + '/login/captcha'
   const data = Object.assign({
     _t: 1517477555442
   })
